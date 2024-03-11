@@ -1,0 +1,174 @@
+from faker import Faker
+import random
+from datetime import datetime, timedelta
+
+fake = Faker()
+
+# Генерация клиентов
+def generate_clients(num_clients):
+    clients = []
+    for _ in range(num_clients):
+        client = {
+            'full_name': fake.name(),
+            'birth_date': fake.date_of_birth(minimum_age=18, maximum_age=65),
+            'gender': random.choice(['Мужской', 'Женский']),
+            'email': fake.email(),
+            'phone_number': fake.phone_number(),
+            'password': fake.password(),
+        }
+        clients.append(client)
+    return clients
+
+# Генерация автомобилей
+def generate_cars(num_cars):
+    cars = []
+    for _ in range(num_cars):
+        car = {
+            'year_of_release': fake.date_between(start_date='-10y', end_date='today'),
+            'model': random.choice(['BMW M5 Competition', 'BMW M5 CS', 'BMW i8', 'BMW M8 Competition Coupe', 'BMW M4 Competition']),
+            'colour': fake.color_name(),
+        }
+        cars.append(car)
+    return cars
+
+# Генерация дилерских центров
+def generate_car_dealerships(num_dealerships):
+    dealerships = []
+    for _ in range(num_dealerships):
+        dealership = {
+            'name_car_dealership': fake.company(),
+            'email': fake.email(),
+            'phone_number': fake.phone_number(),
+            'passcode': fake.uuid4(),
+        }
+        dealerships.append(dealership)
+    return dealerships
+
+# Генерация сотрудников
+def generate_employees(num_employees, car_dealerships):
+    employees = []
+    for _ in range(num_employees):
+        employee = {
+            'full_name_employee': fake.name(),
+            'post': random.choice(['Менеджер по обслуживанию клиентов', 'Механик', 'Администратор']),
+            'phone_number': fake.phone_number(),
+            'email': fake.email(),
+            'passcode': fake.uuid4(),
+            'car_dealership_id': random.choice(car_dealerships)['id'],
+        }
+        employees.append(employee)
+    return employees
+
+# Генерация заказов
+def generate_orders(num_orders, services, employees, cars):
+    orders = []
+    for _ in range(num_orders):
+        order = {
+            'datetime_order': fake.date_time_between(start_date='-1y', end_date='today'),
+            'status_order': random.choice(['Новое', 'В обработке', 'Завершено', 'Отменено', 'Отклонено', 'В ожидании оплаты']),
+            'start_time': fake.date_time_between(start_date='now', end_date='+1y'),
+            'end_time': fake.date_time_between(start_date='+1h', end_date='+1d'),
+            'service_id': random.choice(services)['id'],
+            'employee_id': random.choice(employees)['id'],
+            'car_id': random.choice(cars)['id'],
+        }
+        orders.append(order)
+    return orders
+
+# Генерация платежей
+def generate_payments(num_payments, orders):
+    payments = []
+    for _ in range(num_payments):
+        payment = {
+            'sum_price': random.randint(50, 500),
+            'datetime_payment': fake.date_time_between(start_date='-1y', end_date='now'),
+            'description_payment': fake.text(),
+            'order_id': random.choice(orders)['id'],
+        }
+        payments.append(payment)
+    return payments
+# Генерация автозапчастей
+def generate_autoparts(num_autoparts, cars):
+    autoparts = []
+    for _ in range(num_autoparts):
+        autopart = {
+            'name_autopart': fake.word(),
+            'description_autopart': fake.text(),
+            'model': random.choice(['BMW M5 Competition', 'BMW M5 CS', 'BMW i8', 'BMW M8 Competition Coupe', 'BMW M4 Competition']),
+            'price': random.randint(10, 200),
+            'count': random.randint(1, 50),
+        }
+        autoparts.append(autopart)
+    return autoparts
+
+# Генерация услуг
+def generate_services(num_services, autoparts):
+    services = []
+    for _ in range(num_services):
+        service = {
+            'name_service': fake.word(),
+            'description_service': fake.text(),
+            'price': random.randint(50, 500),
+            'autopart_id': random.choice(autoparts)['id'],
+        }
+        services.append(service)
+    return services
+
+# Генерация чатов
+def generate_chats(num_chats, clients, employees):
+    chats = []
+    for _ in range(num_chats):
+        chat = {
+            'client_id': random.choice(clients)['id'],
+            'employee_id': random.choice(employees)['id'],
+        }
+        chats.append(chat)
+    return chats
+
+# Генерация сообщений
+def generate_messages(num_messages, chats):
+    messages = []
+    for _ in range(num_messages):
+        message = {
+            'type_message': random.choice(['Входящее', 'Исходящее']),
+            'datetime_message': fake.date_time_between(start_date='-1y', end_date='now'),
+            'chat_id': random.choice(chats)['id'],
+        }
+        messages.append(message)
+    return messages
+
+# Генерация владений
+def generate_possessions(num_possessions, clients, cars):
+    possessions = []
+    for _ in range(num_possessions):
+        possession = {
+            'client_id': random.choice(clients)['id'],
+            'car_id': random.choice(cars)['id'],
+        }
+        possessions.append(possession)
+    return possessions
+
+# Вызываем функции для генерации данных
+num_clients = 10
+num_cars = 20
+num_dealerships = 5
+num_employees = 15
+num_services = 10
+num_orders = 30
+num_payments = 20
+num_autoparts = 15
+num_chats = 20
+num_messages = 50
+num_possessions = 10
+
+clients = generate_clients(num_clients)
+cars = generate_cars(num_cars)
+dealerships = generate_car_dealerships(num_dealerships)
+employees = generate_employees(num_employees, dealerships)
+services = generate_services(num_services)
+orders = generate_orders(num_orders, services, employees, cars)
+payments = generate_payments(num_payments, orders)
+autoparts = generate_autoparts(num_autoparts, cars)
+chats = generate_chats(num_chats, clients, employees)
+messages = generate_messages(num_messages, chats)
+possessions = generate_possessions(num_possessions, clients, cars)

@@ -1,7 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import ChoosePage from "./pages/ChoosePage"
-import { Route, Routes, Link } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import LoginPage from "./pages/LoginClient"
 import RegisterPage from './pages/RegisterPage';
 import LoginWorker from './pages/LoginWorker';
@@ -13,8 +12,6 @@ import HomeWorkerPage from './pages/HomeWorkerPage';
 
 
 export function App() {
-  
-
   return (
     <Routes>
       <Route path="/" element={<ChoosePage />} />

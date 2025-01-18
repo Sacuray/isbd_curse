@@ -2,10 +2,8 @@ package com.example.isbd.Enteties;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDate;
 import com.example.isbd.enumerations.Model_car;
 import org.hibernate.annotations.ColumnTransformer;
-import org.hibernate.annotations.CreationTimestamp;
 
 
 @Getter

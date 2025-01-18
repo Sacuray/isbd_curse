@@ -5,7 +5,6 @@ import lombok.*;
 import java.time.LocalDate;
 import com.example.isbd.enumerations.Gender_enum;
 import org.hibernate.annotations.ColumnTransformer;
-import org.hibernate.annotations.CreationTimestamp;
 
 
 @Getter

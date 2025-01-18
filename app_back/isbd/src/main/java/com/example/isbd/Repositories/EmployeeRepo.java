@@ -12,7 +12,7 @@ import java.util.List;
 
 
 public interface EmployeeRepo extends JpaRepository<EmployeeEntity, Long> {
-    @Query("select e from EmployeeEntity e where e.email = ?1")
+    @Query("select e from employee e where e.email = ?1")
     EmployeeEntity findByEmail(String email);
 
     EmployeeEntity findTopByOrderByIdDesc();

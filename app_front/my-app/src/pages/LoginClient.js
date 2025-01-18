@@ -1,6 +1,5 @@
 import LoginClientService from '../services/LoginClientService';
 import React, { useState } from 'react'
-import TextField from '@material-ui/core/TextField';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -10,7 +9,7 @@ function LoginPage() {
         email: "",
         password: "",
     });
-    const [msg, setMsg] = useState("")
+    const [msg] = useState("")
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -29,11 +28,11 @@ function LoginPage() {
             .then((res) => {
                 console.log(res.data)
                 
-                if(res.data == "ok"){
+                if(res.data === "ok"){
                     console.log("piter")
                     console.log(user.email)
                     navigate("/home_client", {state:{email: user.email}})
-                }else if(res.data == "isnull"){
+                }else if(res.data === "isnull"){
                     alert("Some fields not enter")
                 }
                 else{
@@ -65,7 +64,7 @@ function LoginPage() {
                                     </div>
                                     <div className='mb-3'>
                                         <label>Enter Password</label>
-                                        <input type="text" name="password" className='form-control'
+                                        <input type="password" name="password" className='form-control'
                                             onChange={(e) => handleChange(e)}
                                             value={user.password} />
                                     </div>

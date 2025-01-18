@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public interface MyOrderRepo extends JpaRepository<MyOrderEntity, Long> {
-    @Query("select m from MyOrderEntity m where m.carId.id = ?1")
+    @Query("select m from my_order m where m.car_id = ?1")
     MyOrderEntity findByCarId_Id(Integer id);
 
     MyOrderEntity findTopByOrderByIdDesc();

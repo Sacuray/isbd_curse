@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public interface PossessionRepo extends JpaRepository<PossessionEntity, Long> {
-    @Query("select p from PossessionEntity p where p.clientId.id = ?1")
+    @Query("select p from possession p where p.client_id = ?1")
     List<PossessionEntity> findPossessionsByclientId_Id(Integer id);
 
     PossessionEntity findTopByOrderByIdDesc();

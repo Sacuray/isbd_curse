@@ -10,7 +10,6 @@ public class IsbdApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(IsbdApplication.class, args);
-		System.out.println("asvsdvd");
 	}
 
 }

@@ -2,16 +2,9 @@ package com.example.isbd.Enteties;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-
-import java.time.LocalDate;
-import com.example.isbd.enumerations.Gender_enum;
-import com.example.isbd.enumerations.Model_car;
 import com.example.isbd.enumerations.Type_message_enum;
-
 import org.hibernate.annotations.ColumnTransformer;
-import org.hibernate.annotations.CreationTimestamp;
-import com.example.isbd.Enteties.AutopartEntity;
+
 
 
 @Getter
